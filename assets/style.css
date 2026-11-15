@@ -1,0 +1,330 @@
+/* Halaman publik. Dibuat mobile-first: dasar untuk HP, lalu disesuaikan untuk layar lebih lebar.
+   Warna diambil dari produk: coklat tua untuk oncom hideng, hitam arang untuk bungkusan dan tepinya,
+   krem untuk dage yang baru dijemur. Tidak ada gradien dan bayangan lembut. */
+
+:root {
+  --hitam: #15100c;
+  --coklat-tua: #3a2315;
+  --coklat-tua-hover: #4e2f1b;
+  --coklat-bayang: #1b0f08;
+  --coklat: #6b4226;
+  --coklat-muda: #a8733f;
+  --krem: #f4ece0;
+  --krem-gelap: #e7d9c3;
+  --putih-hangat: #fbf7f0;
+  --garis: #cdbba3;
+  --fokus: #d98f2b;
+  --lebar: 1120px;
+}
+
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 72px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--krem);
+  color: var(--hitam);
+  font-family: "Atkinson Hyperlegible", system-ui, sans-serif;
+  font-size: 18px;
+  line-height: 1.65;
+  overflow-x: hidden;
+  padding-bottom: 76px; /* ruang untuk bar bawah di HP */
+}
+
+img { display: block; max-width: 100%; height: auto; }
+p { margin: 0; }
+h1, h2, h3 { margin: 0; color: var(--hitam); line-height: 1.2; }
+h1 { font-size: 1.9rem; }
+h2 { font-size: 1.5rem; margin-bottom: 14px; }
+h3 { font-size: 1.2rem; margin-bottom: 6px; }
+
+a { color: var(--coklat-tua); }
+a:focus-visible { outline: 3px solid var(--fokus); outline-offset: 3px; }
+
+.container {
+  width: 100%;
+  max-width: var(--lebar);
+  margin: 0 auto;
+  padding: 0 18px;
+}
+
+section {
+  padding: 36px 0;
+  border-top: 2px solid var(--hitam);
+}
+
+/* ===== Header ===== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--hitam);
+  color: var(--krem);
+}
+.header-isi {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 64px;
+}
+.merek {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--krem);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.05rem;
+  min-width: 0;
+}
+.merek img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  flex: 0 0 auto;
+}
+.merek span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* ===== Tombol balon =====
+   Diam: mengambang di atas bayangan tebal. Kursor di atas: naik dan membesar.
+   Ditekan: turun dan mengempis. Dilepas: kembali normal. */
+.tombol {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 52px;
+  padding: 12px 22px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--coklat-tua);
+  color: var(--putih-hangat);
+  font: inherit;
+  font-size: 1.05rem;
+  font-weight: 700;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 6px 0 var(--coklat-bayang), 0 12px 16px -10px rgba(21, 16, 12, 0.7);
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease, background-color 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.tombol:hover {
+  background: var(--coklat-tua-hover);
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 9px 0 var(--coklat-bayang), 0 18px 22px -12px rgba(21, 16, 12, 0.8);
+}
+.tombol:active {
+  transform: translateY(4px) scale(0.96);
+  box-shadow: 0 2px 0 var(--coklat-bayang), 0 4px 8px -4px rgba(21, 16, 12, 0.7);
+}
+.tombol:focus-visible { outline: 3px solid var(--fokus); outline-offset: 4px; }
+
+.tombol-hitam { background: var(--hitam); box-shadow: 0 6px 0 #000, 0 12px 16px -10px rgba(0, 0, 0, 0.8); }
+.tombol-hitam:hover { background: #2a201a; box-shadow: 0 9px 0 #000, 0 18px 22px -12px rgba(0, 0, 0, 0.9); }
+
+.tombol-kedua {
+  background: var(--putih-hangat);
+  color: var(--coklat-tua);
+  border: 2px solid var(--coklat-tua);
+  box-shadow: 0 6px 0 var(--garis);
+}
+.tombol-kedua:hover { background: var(--putih-hangat); box-shadow: 0 9px 0 var(--garis); }
+.tombol-kedua:active { box-shadow: 0 2px 0 var(--garis); }
+
+.tombol-kecil { min-height: 48px; padding: 10px 18px; font-size: 1rem; }
+
+/* Di HP, bar bawah sudah memuat tombol WhatsApp, jadi header cukup berisi merek */
+.site-header .tombol { display: none; }
+@media (min-width: 720px) { .site-header .tombol { display: inline-flex; } }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .tombol, .tombol:hover, .tombol:active { transition: none; transform: none; }
+}
+
+.aksi { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
+
+/* ===== Bar bawah (HP saja) ===== */
+.bar-hp {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 30;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding: 10px 14px;
+  background: var(--krem);
+  border-top: 2px solid var(--hitam);
+}
+.bar-hp .tombol { width: 100%; min-height: 50px; }
+
+/* ===== Banner ===== */
+.banner-bagian { padding: 0; border-top: 0; }
+.banner-track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+.banner-track::-webkit-scrollbar { display: none; }
+.banner-slide {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  background: var(--putih-hangat);
+  border-bottom: 2px solid var(--hitam);
+}
+.banner-slide img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+.banner-teks { padding: 22px 18px 26px; }
+.banner-teks h1 { margin-top: 0; }
+.banner-teks p { margin-top: 12px; color: var(--coklat); }
+
+/* ===== Tentang ===== */
+.tentang-grid { display: grid; gap: 22px; }
+.tentang-foto img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+.tentang-grid p { color: var(--coklat); margin-bottom: 12px; }
+
+/* ===== Cara membuat: daftar biasa, bukan kartu ===== */
+.langkah { list-style: none; margin: 0; padding: 0; }
+.langkah li {
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: 4px 14px;
+  padding: 14px 0;
+  border-top: 1px solid var(--garis);
+}
+.langkah li:first-child { border-top: 0; padding-top: 0; }
+.langkah li::before {
+  content: counter(langkah);
+  counter-increment: langkah;
+  grid-row: span 2;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--coklat-tua);
+  color: var(--putih-hangat);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.langkah { counter-reset: langkah; }
+.langkah h3 { margin: 0; }
+.langkah p { color: var(--coklat); font-size: 1rem; }
+
+/* ===== Produk: di HP baris mendatar (foto kecil di kiri) ===== */
+.pengantar { color: var(--coklat); margin-bottom: 18px; }
+.daftar-produk { list-style: none; margin: 0; padding: 0; }
+.produk {
+  display: grid;
+  grid-template-columns: 112px 1fr;
+  gap: 14px;
+  padding: 16px 0;
+  border-top: 1px solid var(--garis);
+}
+.produk:first-child { border-top: 0; padding-top: 0; }
+.produk img {
+  width: 112px;
+  height: 112px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.produk-isi { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.produk-isi h3 { font-size: 1.1rem; }
+.produk-isi p { color: var(--coklat); font-size: 1rem; }
+.produk-isi .aksi { margin-top: 6px; }
+
+.stok {
+  align-self: flex-start;
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+.stok-ada { background: var(--krem-gelap); color: var(--coklat-tua); }
+.stok-habis { background: var(--hitam); color: var(--krem); }
+
+/* ===== Kontak ===== */
+.kontak-grid { display: grid; gap: 22px; }
+.kontak-grid > div > p { margin-bottom: 18px; color: var(--coklat); }
+.info-kontak { margin: 0; display: grid; gap: 14px; }
+.info-kontak dt { color: var(--coklat); font-size: 0.95rem; }
+.info-kontak dd { margin: 0; font-size: 1.05rem; word-break: break-word; }
+.info-kontak a { color: var(--hitam); }
+
+/* ===== Footer ===== */
+.site-footer {
+  background: var(--hitam);
+  color: var(--krem-gelap);
+  padding: 22px 0;
+  font-size: 0.95rem;
+}
+.site-footer a { color: var(--krem); }
+.footer-isi { display: flex; flex-direction: column; gap: 8px; }
+
+/* =====================================================
+   Layar lebih lebar dari HP
+   ===================================================== */
+@media (min-width: 720px) {
+  body { font-size: 19px; padding-bottom: 0; }
+  h1 { font-size: 2.6rem; }
+  h2 { font-size: 1.9rem; }
+  .container { padding: 0 32px; }
+  section { padding: 56px 0; }
+  .header-isi { min-height: 76px; }
+  .merek { font-size: 1.2rem; }
+  .merek img { width: 46px; height: 46px; }
+  .bar-hp { display: none; }
+
+  .banner-slide { display: grid; grid-template-columns: 1.1fr 1fr; }
+  .banner-slide img { aspect-ratio: auto; height: 100%; min-height: 340px; }
+  .banner-teks { padding: 40px; align-self: center; }
+  .banner-teks p { font-size: 1.1rem; }
+
+  .tentang-grid { grid-template-columns: 0.9fr 1.1fr; align-items: center; gap: 48px; }
+  .tentang-foto img { aspect-ratio: 4 / 5; }
+
+  .langkah { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 40px; }
+  .langkah li:nth-child(2) { border-top: 0; padding-top: 0; }
+
+  .daftar-produk { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px 28px; }
+  .produk {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 0;
+    border-top: 0;
+    border: 1px solid var(--garis);
+    background: var(--putih-hangat);
+  }
+  .produk:first-child { padding: 0; }
+  .produk img { width: 100%; height: auto; aspect-ratio: 4 / 3; border-radius: 0; }
+  .produk-isi { padding: 0 20px 22px; }
+
+  .kontak-grid { grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+}
+
+@media (min-width: 1000px) {
+  .daftar-produk { grid-template-columns: repeat(3, 1fr); }
+  .langkah { grid-template-columns: repeat(4, 1fr); gap: 0 28px; }
+  .langkah li { border-top: 0; padding: 0; display: block; }
+  .langkah li::before { margin-bottom: 14px; grid-row: auto; }
+  .langkah li:nth-child(2) { border-top: 0; padding-top: 0; }
+  .footer-isi { flex-direction: row; justify-content: space-between; flex-wrap: wrap; }
+}

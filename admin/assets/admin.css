@@ -1,0 +1,292 @@
+/* Panel admin dibuat untuk pengguna yang tidak terbiasa dengan komputer:
+   teks besar, tombol besar, kontras tinggi, dan satu aksi utama per kartu. */
+
+:root {
+  --latar: #f4ece0;
+  --permukaan: #fbf7f0;
+  --teks: #15100c;
+  --teks-lembut: #6b4226;
+  --primer: #3a2315;
+  --primer-hover: #4e2f1b;
+  --primer-gelap: #1b0f08;
+  --bahaya: #8a1f1f;
+  --bahaya-latar: #f7e4e4;
+  --garis: #cdbba3;
+  --fokus: #d98f2b;
+  --ok-latar: #e7d9c3;
+  --ok-teks: #3a2315;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--latar);
+  color: var(--teks);
+  font-family: "Atkinson Hyperlegible", system-ui, sans-serif;
+  font-size: 20px;
+  line-height: 1.6;
+}
+
+h1 { font-size: 2rem; margin: 0 0 24px; }
+h2 { font-size: 1.5rem; margin: 0 0 16px; }
+p { margin: 0 0 12px; }
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+  outline: 3px solid var(--fokus);
+  outline-offset: 3px;
+}
+
+/* ===== Bagian atas ===== */
+.admin-atas {
+  background: var(--permukaan);
+  border-bottom: 2px solid var(--garis);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.admin-atas-isi {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.admin-judul strong { display: block; font-size: 1.3rem; }
+.admin-judul span { color: var(--teks-lembut); font-size: 1rem; }
+
+.admin-menu { display: flex; flex-wrap: wrap; gap: 10px; }
+.admin-menu a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 52px;
+  padding: 10px 18px;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  color: var(--teks);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+.admin-menu a:hover { border-color: var(--garis); background: var(--latar); }
+.admin-menu a.aktif { background: var(--primer); color: #fff; }
+.admin-menu a.keluar { color: var(--bahaya); }
+
+.admin-isi { max-width: 1200px; margin: 0 auto; padding: 32px 24px 64px; }
+
+/* ===== Pesan ===== */
+.pesan {
+  padding: 16px 20px;
+  border-radius: 10px;
+  margin-bottom: 24px;
+  font-weight: 700;
+  border: 2px solid;
+}
+.pesan-ok { background: var(--ok-latar); color: var(--ok-teks); border-color: #a8733f; }
+.pesan-error { background: var(--bahaya-latar); color: var(--bahaya); border-color: #e3a5a5; }
+
+/* ===== Tombol ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 56px;
+  padding: 12px 26px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--primer);
+  color: #fff;
+  font: inherit;
+  font-weight: 700;
+  font-size: 1.15rem;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 5px 0 var(--primer-gelap);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+.btn:hover { background: var(--primer-hover); transform: translateY(-2px); box-shadow: 0 7px 0 var(--primer-gelap); }
+.btn:active { transform: translateY(3px); box-shadow: 0 2px 0 var(--primer-gelap); }
+.btn-kedua {
+  background: var(--permukaan);
+  color: var(--primer-gelap);
+  border: 2px solid var(--primer);
+  box-shadow: 0 5px 0 var(--garis);
+}
+.btn-kedua:hover { background: var(--permukaan); box-shadow: 0 7px 0 var(--garis); }
+.btn-kedua:active { box-shadow: 0 2px 0 var(--garis); }
+.btn-bahaya {
+  background: var(--permukaan);
+  color: var(--bahaya);
+  border: 2px solid var(--bahaya);
+  box-shadow: 0 5px 0 #e3a5a5;
+}
+.btn-bahaya:hover { background: var(--bahaya-latar); box-shadow: 0 7px 0 #e3a5a5; }
+.btn-bahaya:active { box-shadow: 0 2px 0 #e3a5a5; }
+
+@media (prefers-reduced-motion: reduce) {
+  .btn, .btn:hover, .btn:active { transition: none; transform: none; }
+}
+
+/* ===== Kartu ===== */
+.kartu-admin {
+  background: var(--permukaan);
+  border: 2px solid var(--garis);
+  border-radius: 16px;
+  padding: 28px;
+  margin-bottom: 28px;
+}
+.kartu-admin .baris {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 32px;
+  align-items: start;
+}
+.kartu-admin .foto-saat-ini img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 2px solid var(--garis);
+}
+.kartu-admin .foto-saat-ini label { margin-top: 14px; }
+
+/* ===== Formulir ===== */
+label {
+  display: block;
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin: 18px 0 8px;
+}
+label:first-child { margin-top: 0; }
+
+input[type=text],
+input[type=number],
+textarea {
+  width: 100%;
+  min-height: 56px;
+  padding: 12px 16px;
+  border: 2px solid var(--garis);
+  border-radius: 10px;
+  background: var(--permukaan);
+  color: var(--teks);
+  font: inherit;
+  font-size: 1.1rem;
+}
+textarea { min-height: 120px; resize: vertical; }
+input[type=file] {
+  font: inherit;
+  font-size: 1.05rem;
+  padding: 10px 0;
+}
+input[type=checkbox] {
+  width: 26px;
+  height: 26px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+.cek-baris { font-size: 1.1rem; font-weight: 700; margin-top: 18px; }
+
+.bantuan { color: var(--teks-lembut); font-size: 1rem; margin-top: 6px; }
+
+/* Stok: tombol − dan + besar di kiri-kanan kotak angka */
+.stok-kontrol { display: flex; align-items: center; gap: 12px; }
+.stok-kontrol input { width: 140px; text-align: center; font-size: 1.5rem; font-weight: 700; }
+.stok-kontrol .tombol-bulat {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid var(--primer);
+  background: var(--permukaan);
+  color: var(--primer-gelap);
+  font: inherit;
+  font-size: 2rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 0 var(--garis);
+}
+.stok-kontrol .tombol-bulat:hover { background: var(--ok-latar); }
+.stok-kontrol .tombol-bulat:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--garis); }
+
+.aksi-kartu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 2px solid var(--garis);
+  align-items: center;
+  justify-content: space-between;
+}
+.aksi-kartu .kiri { display: flex; gap: 14px; flex-wrap: wrap; }
+
+.tanda-stok {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 14px;
+}
+.tanda-ada { background: var(--ok-latar); color: var(--ok-teks); }
+.tanda-habis { background: var(--bahaya-latar); color: var(--bahaya); }
+
+.tambah-bagian { margin-top: 40px; }
+.tambah-bagian summary {
+  cursor: pointer;
+  list-style: none;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--primer-gelap);
+  padding: 18px 22px;
+  background: var(--permukaan);
+  border: 2px dashed var(--primer);
+  border-radius: 16px;
+}
+.tambah-bagian summary::-webkit-details-marker { display: none; }
+.tambah-bagian[open] summary { margin-bottom: 24px; }
+
+.kotak-pesan {
+  max-width: 640px;
+  margin: 64px auto;
+  padding: 32px;
+  background: var(--permukaan);
+  border: 2px solid var(--garis);
+  border-radius: 16px;
+}
+.teknis { font-size: 0.95rem; color: var(--teks-lembut); word-break: break-word; }
+
+/* ===== Halaman login ===== */
+.halaman-login {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.kotak-login {
+  width: 100%;
+  max-width: 480px;
+  background: var(--permukaan);
+  border: 2px solid var(--garis);
+  border-radius: 16px;
+  padding: 36px;
+}
+.kotak-login .btn { width: 100%; margin-top: 24px; }
+.kotak-login .kembali { display: block; text-align: center; margin-top: 22px; font-size: 1.1rem; }
+
+/* ===== Layar kecil ===== */
+@media (max-width: 760px) {
+  body { font-size: 19px; }
+  .kartu-admin .baris { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .kartu-admin .baris > * { min-width: 0; }
+  .kartu-admin input[type=file] { max-width: 100%; }
+  .kartu-admin input[type=text], .kartu-admin input[type=number], .kartu-admin textarea { max-width: 100%; }
+  .kartu-admin { padding: 20px; }
+  /* Di HP: 2 kolom dengan lebar sama, 6 menu jadi 3 baris rapi */
+  .admin-menu { display: grid; grid-template-columns: 1fr 1fr; width: 100%; gap: 10px; }
+  .admin-menu a { justify-content: center; text-align: center; min-height: 56px; padding: 10px 12px; }
+  .stok-kontrol input { width: 110px; }
+  .admin-isi { padding: 24px 16px 48px; }
+}

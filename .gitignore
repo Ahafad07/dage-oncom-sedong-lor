@@ -1,0 +1,11 @@
+# Kredensial database (jangan pernah di-commit)
+config.local.php
+
+# Foto hasil unggahan admin. Foto bawaan untuk produk seed tetap dikecualikan di bawah.
+uploads/*
+!uploads/tutug-oncom.jpg
+
+# File sistem
+.DS_Store
+Thumbs.db
+*.log
